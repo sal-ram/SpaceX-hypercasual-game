@@ -6,3 +6,5 @@ I mastered:
 - Unity Ads (ads) 
 - Saving Player's data with JSON.
 - Upgrade skill of optimizing game for mobile
+
+YOUTUBE GAMEPLAY: https://youtu.be/OTQ0mKYWdpI

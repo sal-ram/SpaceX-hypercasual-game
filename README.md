@@ -5,3 +5,4 @@ I mastered:
 - NavMesh (AI for bots)
 - Unity Ads (ads) 
 - Saving Player's data with JSON.
+- Upgrade skill of optimizing game for mobile

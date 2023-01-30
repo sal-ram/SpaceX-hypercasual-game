@@ -1,7 +1,7 @@
 # SpaceX-hypercasual-game
 SpaceX is a hypercasual game for android.
 
-I mastered
+I mastered:
 - NavMesh (AI for bots)
 - Unity Ads (ads) 
 - Saving Player's data with JSON.

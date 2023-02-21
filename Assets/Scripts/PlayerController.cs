@@ -10,6 +10,7 @@ public class PlayerController : Controller
 {
     public delegate void PlayerFall();
     public event PlayerFall OnPlayerFall;
+
     [Header("Audio of taking brick")]
     [SerializeField] private AudioClip _brickAudio;
 
@@ -34,6 +35,8 @@ public class PlayerController : Controller
     [SerializeField] private float _moveSpeed = 8;
 
     private bool IsFallMusicPlayed = false;
+
+    public Transform HatPlace;
 
     private void OnDisable()
     {
@@ -102,7 +105,6 @@ public class PlayerController : Controller
     void LateUpdate()
     {
         _characterController.Move(_moveSpeed * Time.deltaTime * _movementVector);
-        //transform.LookAt(transform.position + _movementVector.normalized);
         if (_movementVector.magnitude > 0)
         {
             Quaternion rotation = Quaternion.LookRotation(_movementVector.normalized, Vector3.up);
@@ -153,14 +155,6 @@ public class PlayerController : Controller
         }
 
         _characterController.Move(new Vector3(0, _velocity * Time.deltaTime, 0));
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-       /* if (collision.collider.gameObject.CompareTag("Trampoline"))
-        {
-            _characterController.Move(new Vector3(0, 5, 5));
-        }*/
     }
 
     private void OnTriggerEnter(Collider other)
@@ -226,7 +220,7 @@ public class PlayerController : Controller
         {
             try
             {
-                InvokeReachingFinish(gameObject.name);
+                InvokeReachingFinish(gameObject.tag);
             }
             catch (Exception ex)
             {

@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class CollisionPlayersManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController _player;
-    [SerializeField] private BotController _botYellow;
-    [SerializeField] private BotController _botGreen;
-    [SerializeField] private BotController _botPink;
+    private PlayerController _player;
+
+    [Inject(Id = "BotYellow")]
+    private BotController _botYellow;
+    [Inject(Id = "BotGreen")]
+    private BotController _botGreen;
+    [Inject(Id = "BotPink")]
+    private BotController _botPink;
 
     private bool YellowRedCollision = false;
     private bool YellowPinkCollision = false;
@@ -15,6 +20,12 @@ public class CollisionPlayersManager : MonoBehaviour
     private bool RedGreenCollision = false;
     private bool RedPinkCollision = false;
     private bool PinkGreenCollision = false;
+
+    [Inject]
+    private void Construct(PlayerController playerController)
+    {
+        _player = playerController;
+    }
 
     private void Awake()
     {

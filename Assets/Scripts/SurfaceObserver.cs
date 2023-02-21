@@ -1,29 +1,38 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using System.Linq;
-using System;
+using Zenject;
 
 public class SurfaceObserver : MonoBehaviour
 {
-    //[SerializeField] private NavMeshSurface surfaceForMovingObjects;
-    //[SerializeField] private NavMeshSurface surfaceForLevel;
-    //private NavMeshSurface surface;
-    //private bool IsSurfaceRemoved = false;
-    //[SerializeField] private NavSurfaceBaker _surfaceBaker;
     [SerializeField] private BrickManager _brickManager;
     [SerializeField] private Transform[] wayPointsMassive;
     [SerializeField] private List<LadderManager> ladderManagers;
-    //[SerializeField] private bool IsAdded = false;
+
     private int indexOfLadder = 0;
 
+    private PlayerController _playerController;
+
+    [Inject(Id = "BotGreen")]
+    private BotController _botGreen;
+
+    [Inject(Id = "BotYellow")]
+    private BotController _botYellow;
+
+    [Inject(Id = "BotPink")]
+    private BotController _botPink;
+
     public List<DestroyHandler> destroyHandlers;
+
+    [Inject]
+    private void Construct(PlayerController playerController)
+    {
+        _playerController = playerController;
+    }
 
     private void Awake()
     {
         ShuffleList();
-        //surface = GetComponent<NavMeshSurface>();
     }
 
     private void ShuffleList()
@@ -50,86 +59,46 @@ public class SurfaceObserver : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*try
-        {
-            if (_brickManager?.countOfPlayers == 0 && !IsSurfaceRemoved && IsAdded)
-            {
-                _surfaceBaker.RemoveSurface(surfaceForMovingObjects);
-                IsAdded = false;
-                IsSurfaceRemoved = true;
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }*/
-    }
-
     private void CheckName(string name)
     {
-        /*if (!IsAdded)
-        {
-            AddToBaker();
-        }*/
-
         if (name == "Character")
         {
-            var player = GameObject.Find(name);
-            DetectPlayerOnSurface(player);
+            DetectPlayerOnSurface();
             _brickManager.SpawnRedBricks();
         }
 
         if (name == "BotYellow")
         {
-            var bot = GameObject.Find(name);
-            DetectBotOnSurface(bot);
+            DetectBotOnSurface(_botYellow);
             _brickManager.SpawnYellowBricks();
         }
 
         if (name == "BotPink")
         {
-            var bot = GameObject.Find(name);
-            DetectBotOnSurface(bot);
+            DetectBotOnSurface(_botPink);
             _brickManager.SpawnPinkBricks();
         }
 
         if (name == "BotGreen")
         {
-            var bot = GameObject.Find(name);
-            DetectBotOnSurface(bot);
+            DetectBotOnSurface(_botGreen);
             _brickManager.SpawnGreenBricks();
         }
     }
 
-    private void DetectPlayerOnSurface(GameObject player)
+    private void DetectPlayerOnSurface()
     {
-        var playerController = player.GetComponent<PlayerController>();
-        playerController.UpdateManager(_brickManager);
-        //_brickManager.AddNewPlayer();
+        _playerController.UpdateManager(_brickManager);
     }
 
-    private void AddToBaker()
+    private void DetectBotOnSurface(BotController bot)
     {
-        //_surfaceBaker.AddSurface(surfaceForMovingObjects);
-        //_brickManager.gameObject.SetActive(true);
-        /*IsAdded = true;
-        IsSurfaceRemoved = false;*/
-    }
-
-    private void DetectBotOnSurface(GameObject bot)
-    {
-        var botController = bot.GetComponent<BotController>();
         if (indexOfLadder >= ladderManagers.Count)
         {
             indexOfLadder = 0;
         }
-        //var indexOfLadder = Random.Range(0, ladderManagers.Count);
-        botController.UpdateManagers(_brickManager, wayPointsMassive, ladderManagers[indexOfLadder]);
+
+        bot.UpdateManagers(_brickManager, wayPointsMassive, ladderManagers[indexOfLadder]);
         indexOfLadder++;
-        //_brickManager.AddNewPlayer();
-        //ladderManagers.RemoveAt(indexOfLadder);
     }
 }

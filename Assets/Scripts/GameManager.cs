@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,40 +12,40 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ShopManager _shopManager;
     [SerializeField] private AdsManager _adsManager;
 
-    //[SerializeField] private List<GameObject> _listOfPlayersObj;
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _loseAudio;
     [SerializeField] private AudioClip _winAudio;
 
-    [SerializeField] private PlayerController _playerController;
-    [SerializeField] private List<Controller> _listOfPlayers;
+    private PlayerController _playerController;
+
+    [Inject(Id = "BotYellow")]
+    private BotController _botYellow;
+    [Inject(Id = "BotGreen")]
+    private BotController _botGreen;
+    [Inject(Id = "BotPink")]
+    private BotController _botPink;
+
+    private List<Controller> _listOfPlayers;
 
     private readonly int _amountMoneyForWin = 100;
+
+    [Inject]
+    private void Construct(PlayerController playerController)
+    {
+        _playerController = playerController;
+    }
 
     private void Awake()
     {
         _shopManager.OnGameStart();
         Application.targetFrameRate = 60;
-        //_surfaceManager.OnAllLaddersIsBuilded += OnSurfaceBaked;
         _audioSource = GetComponent<AudioSource>();
-        //_listOfMenus = new List<GameObject> { _loseMenu, _winMenu, _mainMenu };
-        //_mainMenu.SetActive(true);
-        _listOfPlayers.Add(_playerController);
+        _listOfPlayers = new List<Controller>() { _playerController, _botYellow, _botGreen, _botPink };
         ConnectPlayersHandlers();
-    }
-
-    private void OnSurfaceBaked()
-    {
-        /*for (int i = 0; i < _listOfPlayersObj.Count; i++)
-        {
-            _listOfPlayersObj[i].GetComponent<NavMeshAgent>().enabled = true;
-        }*/
     }
 
     private void OnLose()
     {
-        /*CloseAllMenus();
-        _loseMenu.SetActive(true);*/
         StopGame();
         _audioSource.PlayOneShot(_loseAudio);
         _uiManager.OpenLoseMenu();
@@ -52,16 +53,14 @@ public class GameManager : MonoBehaviour
 
     private void OnWin()
     {
-        /*CloseAllMenus();
-        _winMenu.SetActive(true);*/
         StopGame();
         _audioSource.PlayOneShot(_winAudio);
         _uiManager.OpenWinMenu();
     }
 
-    private void OnReachingFinish(string name)
+    private void OnReachingFinish(string tag)
     {
-        if (name == "Character")
+        if (tag == "Player")
         {
             OnWin();
         }

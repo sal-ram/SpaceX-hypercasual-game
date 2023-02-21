@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerDecorator : MonoBehaviour
 {
-    [SerializeField] private Transform _playersHatPlace;
+    private Transform _hatPlaceTransform;
     [SerializeField] private GameObject _hat1;
     [SerializeField] private GameObject _hat2;
     [SerializeField] private GameObject _hat3;
+
+    [Inject]
+    private void COnstruct(PlayerController playerController)
+    {
+        _hatPlaceTransform = playerController.HatPlace;
+    }
 
     /*public void BuyItem(Item.ItemType itemType)
     {
@@ -37,29 +44,29 @@ public class PlayerDecorator : MonoBehaviour
     public void WearHat1()
     {
         DeletePreviousHat();
-        var hat = Instantiate(_hat1, _playersHatPlace);
+        var hat = Instantiate(_hat1, _hatPlaceTransform);
         hat.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     public void WearHat2()
     {
         DeletePreviousHat();
-        var hat = Instantiate(_hat2, _playersHatPlace);
+        var hat = Instantiate(_hat2, _hatPlaceTransform);
         hat.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     public void WearHat3()
     {
         DeletePreviousHat();
-        var hat = Instantiate(_hat3, _playersHatPlace);
+        var hat = Instantiate(_hat3, _hatPlaceTransform);
         hat.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     private void DeletePreviousHat()
     {
-        if (_playersHatPlace.childCount > 0)
+        if (_hatPlaceTransform.childCount > 0)
         {
-            Destroy(_playersHatPlace.GetChild(0).gameObject);
+            Destroy(_hatPlaceTransform.GetChild(0).gameObject);
         }
     }    
 }

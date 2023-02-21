@@ -23,7 +23,6 @@ public class BotController : Controller
     private int indexOfWayPoint = 0;
     private float speed = 9;
 
-    //private int amountOfRuns = 2;
     private int actualAmountOfRuns = 0;
 
     private bool IsPatrolling;
@@ -32,14 +31,13 @@ public class BotController : Controller
 
     void Start()
     {
-        //_characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         IsPatrolling = false;
         IsFoundBrick = false;
         IsEnoughPacked = false;
         CalculateIndexOfLayer();
-        Patrolling();
+        //Patrolling();
     }
 
     // Update is called once per frame
@@ -148,7 +146,6 @@ public class BotController : Controller
         if (other.CompareTag(_brickCollector.brickTag))
         {
             other.GetComponent<ITriggerable>().OnTrigger();
-            //agent.velocity = Vector3.zero;
             _brickCollector.AddBrick();
             _brickManager.AddNewFreeSpaceForBrick(_brickCollector.brickTag, other.transform.parent);
 
@@ -177,10 +174,8 @@ public class BotController : Controller
             }
             else
             {
-                //agent.SetDestination(_positionOfFirstStep);
                 _positionOfStep = _positionOfFirstStep;
                 GoingToStartofLadder();
-                //Patrolling();
             }
         }
 
@@ -192,18 +187,15 @@ public class BotController : Controller
 
         if (other.gameObject.CompareTag("KnockoutChecker") && IsPlayerGrounded())
         {
-            /*if (IsPlayerGrounded())
-            {*/
-                try
-                {
-                    var knockoutHandler = other.gameObject.GetComponent<KnockoutChecker>();
-                    InvokeCollisionWithPlayerHandler(knockoutChecker.nameOfColor, knockoutHandler.nameOfColor);
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log(ex.Message);
-                }
-            //}
+            try
+            {
+                var knockoutHandler = other.gameObject.GetComponent<KnockoutChecker>();
+                InvokeCollisionWithPlayerHandler(knockoutChecker.nameOfColor, knockoutHandler.nameOfColor);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
         }
 
         if (other.gameObject.CompareTag("Finish"))
@@ -222,7 +214,6 @@ public class BotController : Controller
     public void UpdateManagers(BrickManager brickManager, Transform[] wayPointsMassive, LadderManager bridgeManager)
     {
         actualAmountOfRuns = 0;
-        //_surfaceBaker = surface;
         _brickManager?.RemovePlayer();
         this._brickManager = brickManager;
         this._brickManager.AddNewPlayer();

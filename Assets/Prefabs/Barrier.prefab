@@ -107,10 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773487778541253901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61464dca428fac9418079b3a08833cad, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ce3eca25a0ed2547b60560fc72b75c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stepObj: {fileID: 6205961697752732028, guid: 21e19ffde61ecb84dba9bc1f1caf0929, type: 3}
+  _stepObj: {fileID: 2321698855758188645}
   _barrierObj: {fileID: 4408003209945069562}
   _backObj: {fileID: 4338744391838918560}
   step: {fileID: 2321698855758188645}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4019084187602267592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b609ba0e57099ef4a86646ecc3e74f39, type: 3}
+  m_Script: {fileID: 11500000, guid: 372e53d8def03f14babb6ca3c3cb3f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _barrierObj: {fileID: 4408003209945069562}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4408003210484116425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347433a32b77b124696c2c35ceab8d19, type: 3}
+  m_Script: {fileID: 11500000, guid: b1d82553b1729d946917731268240383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   step: {fileID: 2321698855758188645}

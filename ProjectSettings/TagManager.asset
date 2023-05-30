@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Brick
+  - Barrier
+  - BrickYellow
+  - BrickRed
+  - BrickBlue
+  - BrickPink
+  - BrickGreen
+  - Step
+  - BarrierBack
+  - Bot
+  - BotYellow
+  - BotGreen
+  - BotPink
+  - Trampoline
+  - KnockoutChecker
+  - Ground
+  - Ladder
+  - Jump
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - BrickYellow
+  - BrickRed
+  - BrickPink
+  - BrickGreen
+  - 
+  - 
+  - BarrierYellow
+  - BarrierRed
+  - BarrierPink
+  - BarrierGreen
+  - Rail
+  - Bot
+  - Barrier
+  - BotYellow
+  - BotGreen
+  - 
+  - BotRed
+  - BotPink
+  - 
+  - BrickBot
+  - Ground
+  - KnockOutCheckerRed
+  - KnockOutCheckerGreen
+  - KnockOutCheckerYellow
+  - KnockOutCheckerPink
+  - VFX
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2440793877
+    locked: 0

@@ -1,0 +1,2 @@
+-keep public class com.unity3d.services.banners.view.BannerPosition {
+}

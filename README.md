@@ -11,6 +11,6 @@ I mastered:
 - Addressables Remote
 - Levels are downloading runtime from VK Cloud
 
-YOUTUBE GAMEPLAY: https://youtu.be/OTQ0mKYWdpI
+YOUTUBE GAMEPLAY: In progress
 
-Apk build (game): https://drive.google.com/file/d/1_hel0FCY94T8JCXk2rqKeE_hWAsl0vYZ/view?usp=share_link
+Apk build (game): In progress

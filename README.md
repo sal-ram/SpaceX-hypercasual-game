@@ -1,5 +1,5 @@
 # SpaceX-hypercasual-game
-SpaceX is a hypercasual game for android.
+BrickCollector (main name) is a hypercasual game for android.
 
 I mastered:
 
@@ -14,3 +14,5 @@ I mastered:
 YOUTUBE GAMEPLAY: In progress
 
 Apk build (game): In progress
+
+It is required Unity 2021.3.16f1 for opening this project on PC.

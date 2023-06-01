@@ -13,6 +13,6 @@ I mastered:
 
 YOUTUBE GAMEPLAY: In progress
 
-Apk build (game): In progress
+Apk build (game): https://drive.google.com/file/d/15MwcAR-xqDhTO5RKTI9DhIysOTPCRTlM/view?usp=sharing
 
 It is required Unity 2021.3.16f1 for opening this project on PC.

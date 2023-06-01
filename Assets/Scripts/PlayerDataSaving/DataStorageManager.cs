@@ -40,7 +40,7 @@ public class DataStorageManager : MonoBehaviour
 
         public int indexOfEquippedHat = -1;
         public int indexOfCurrentLevel = 1;
-        public int indexOfCurrentUpgrade = 1;
+        public int indexOfCurrentUpgrade = 9;
     }
 
     public void SaveNewData()

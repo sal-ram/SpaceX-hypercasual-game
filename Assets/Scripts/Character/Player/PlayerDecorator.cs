@@ -6,6 +6,7 @@ using Zenject;
 public class PlayerDecorator : MonoBehaviour
 {
     private Transform _hatPlaceTransform;
+    private PlayerController _playerController;
     [SerializeField] private GameObject _hat1;
     [SerializeField] private GameObject _hat2;
     [SerializeField] private GameObject _hat3;
@@ -14,6 +15,7 @@ public class PlayerDecorator : MonoBehaviour
     private void COnstruct(PlayerController playerController)
     {
         _hatPlaceTransform = playerController.HatPlace;
+        _playerController = playerController;
     }
 
     public void WearNoHat()
@@ -48,5 +50,10 @@ public class PlayerDecorator : MonoBehaviour
         {
             Destroy(_hatPlaceTransform.GetChild(0).gameObject);
         }
-    }    
+    }
+
+    public void SetupBrickLimit(int limit)
+    {
+        _playerController.limitOfBrickStorage = limit;
+    }
 }

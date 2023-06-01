@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private List<Controller> _listOfPlayers;
 
     private readonly int _amountMoneyForWin = 100;
+    private readonly int _amountMoneyForLoss = 30;
 
     [Inject]
     private void Construct(PlayerController playerController)
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        AddMoneyForLoss();
         var indexOfNewLevel = DataStorageManager.Instance.indexOfCurrentLevel;
         AddressablesLoader.Instance.RestartLevelAsync(indexOfNewLevel);
     }
@@ -127,6 +129,10 @@ public class GameManager : MonoBehaviour
         {
             _listOfPlayers[i].IsGameStarted = false;
         }
+    }
+    public void AddMoneyForLoss()
+    {
+        _shopManager.AddMoney(_amountMoneyForLoss);
     }
 
     public void AddMoneyForWin()

@@ -39,7 +39,6 @@ public class PlayerController : Controller
     public Transform HatPlace;
 
     private bool IsJump = false;
-
     public bool IsWin { get; private set; } = false;
 
     public AnimationCurve m_Curve = new AnimationCurve();
@@ -184,10 +183,13 @@ public class PlayerController : Controller
 
         if (other.CompareTag(_brickCollector.brickTag))
         {
-            _audioSource.PlayOneShot(_brickAudio);
-            _brickCollector.AddBrick();
-            _brickManager.AddNewFreeSpaceForBrick(_brickCollector.brickTag, other.transform.parent);
-            other.GetComponent<ITriggerable>().OnTrigger();
+            if (_brickCollector.GetAmountOfBricks() <= limitOfBrickStorage)
+            {
+                _audioSource.PlayOneShot(_brickAudio);
+                _brickCollector.AddBrick();
+                _brickManager.AddNewFreeSpaceForBrick(_brickCollector.brickTag, other.transform.parent);
+                other.GetComponent<ITriggerable>().OnTrigger();
+            }
         }
 
         if (other.CompareTag("Barrier"))

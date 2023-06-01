@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ParticleSystem _sadSmileEffect;
     [SerializeField] private ParticleSystem _fireworksEffectLeft;
     [SerializeField] private ParticleSystem _fireworksEffectRight;
+    [SerializeField] private TextMeshProUGUI _brickCapacityText;
 
     private List<GameObject> _listOfMenus;
     private List<ParticleSystem> _listOfEffects;
@@ -25,8 +27,7 @@ public class UIManager : MonoBehaviour
     {
         _listOfMenus = new List<GameObject> { _loseMenu, _winMenu, _mainMenu, _shopMenu };
         _listOfEffects = new List<ParticleSystem> { _happySmileEffect, _sadSmileEffect, _fireworksEffectLeft, _fireworksEffectRight };
-        _mainMenu.SetActive(true);
-        TurnOnBackground();
+        OpenMainMenu();
     }
 
     public void OpenLoseMenu()
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
         TurnOffAllVFX();
         TurnOnBackground();
         _mainMenu.SetActive(true);
+        UpdateBrickCapacityUIText();
     }
 
     public void CloseAllMenus()
@@ -100,6 +102,11 @@ public class UIManager : MonoBehaviour
     private void TurnOnLoseEffect()
     {
         _sadSmileEffect.Play();
+    }
+
+    private void UpdateBrickCapacityUIText()
+    {
+        _brickCapacityText.SetText("Brick capacity now is " + DataStorageManager.Instance.indexOfCurrentUpgrade);
     }
 
 }

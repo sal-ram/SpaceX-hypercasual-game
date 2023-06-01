@@ -20,6 +20,8 @@ public class ShopManager : MonoBehaviour
         AmountOfMoney = DataStorageManager.Instance.AmountOfMoney;
         _textOfWallet.SetText(AmountOfMoney.ToString());
 
+        _playerDecorator.SetupBrickLimit(DataStorageManager.Instance.indexOfCurrentUpgrade);
+
         switch (DataStorageManager.Instance.indexOfEquippedHat)
         {
             default:
@@ -51,6 +53,7 @@ public class ShopManager : MonoBehaviour
         CreateItemButtonBool(Item.ItemType.Hat1, Item.GetSprite(Item.ItemType.Hat1), Item.GetCost(Item.ItemType.Hat1), DataStorageManager.Instance.IsHat1Bought);
         CreateItemButtonBool(Item.ItemType.Hat2, Item.GetSprite(Item.ItemType.Hat2), Item.GetCost(Item.ItemType.Hat2), DataStorageManager.Instance.IsHat2Bought);
         CreateItemButtonBool(Item.ItemType.Hat3, Item.GetSprite(Item.ItemType.Hat3), Item.GetCost(Item.ItemType.Hat3), DataStorageManager.Instance.IsHat3Bought);
+        CreateItemButtonInt(Item.ItemType.BrickAmountUpgrade, Item.GetSprite(Item.ItemType.BrickAmountUpgrade), Item.GetCost(Item.ItemType.BrickAmountUpgrade));
     }
 
     private void CreateItemButtonBool(Item.ItemType itemType, Sprite itemSprite, int itemCost, bool IsItemBought)
@@ -97,7 +100,7 @@ public class ShopManager : MonoBehaviour
         shopItemTransform.GetComponent<Button>().onClick.AddListener(() => TryBuyItem(itemType, textButton, coinImg)); 
     }
 
-    /*private void CreateItemButtonInt(Item.ItemType itemType, Sprite itemSprite, int itemCost)
+    private void CreateItemButtonInt(Item.ItemType itemType, Sprite itemSprite, int itemCost)
     {
         Transform shopItemTransform = Instantiate(_shopItemTemplate, _container);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
@@ -105,41 +108,12 @@ public class ShopManager : MonoBehaviour
         var textButton = shopItemTransform.Find("CostText").GetComponent<TextMeshProUGUI>();
         var coinImg = shopItemTransform.Find("CoinImage");
 
-        _listofItemsTexts.Add(textButton);
-
-        if (IsItemBought)
-        {
-            UpdateItemToOwned(textButton, coinImg);
-            if (((int)itemType) == DataStorageManager.Instance.indexOfCurrentUpgrade)
-            {
-                textButton.SetText("Equipped");
-                switch (itemType)
-                {
-                    default:
-                    case Item.ItemType.NoHat:
-                        break;
-                    case Item.ItemType.Hat1:
-                        _playerDecorator.WearHat1();
-                        break;
-                    case Item.ItemType.Hat2:
-                        _playerDecorator.WearHat2();
-                        break;
-                    case Item.ItemType.Hat3:
-                        _playerDecorator.WearHat3();
-                        break;
-                }
-            }
-        }
-        else
-        {
-            textButton.SetText(itemCost.ToString());
-        }
-
+        textButton.SetText((itemCost * (DataStorageManager.Instance.indexOfCurrentUpgrade + 1)).ToString());
         shopItemTransform.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
         shopItemTransform.gameObject.SetActive(true);
 
         shopItemTransform.GetComponent<Button>().onClick.AddListener(() => TryBuyItem(itemType, textButton, coinImg));
-    }*/
+    }
 
     private void TryBuyItem(Item.ItemType itemType, TextMeshProUGUI buttonText, Transform imgOfCoin)
     {
@@ -221,6 +195,18 @@ public class ShopManager : MonoBehaviour
                         UpdateNewEquippedItem((int)Item.ItemType.Hat3);
                         UpdateIndexEquippedItemDataStorage((int)Item.ItemType.Hat3);
                     }
+                }
+                break;
+            case Item.ItemType.BrickAmountUpgrade:
+                var upgradeCost = (DataStorageManager.Instance.indexOfCurrentUpgrade + 1) * Item.GetCost(itemType);
+                if (AmountOfMoney >= upgradeCost)
+                {
+                    AmountOfMoney -= upgradeCost;
+                    _textOfWallet.SetText(AmountOfMoney.ToString());
+                    DataStorageManager.Instance.indexOfCurrentUpgrade++;
+                    _playerDecorator.SetupBrickLimit(DataStorageManager.Instance.indexOfCurrentUpgrade);
+                    buttonText.SetText((Item.GetCost(itemType) * (DataStorageManager.Instance.indexOfCurrentUpgrade + 1)).ToString());
+                    UpdateMoneyDataStorage();
                 }
                 break;
         }

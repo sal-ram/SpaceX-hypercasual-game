@@ -41,6 +41,8 @@ public abstract class Controller : MonoBehaviour
     public AnimationCurve TossCurve = new AnimationCurve();
     private int _durationOfTossing = 1;
 
+    public int limitOfBrickStorage;
+
     protected void CalculateIndexOfLayer()
     {
         _layerOfBarrierIndex = (int)Mathf.Log(_layerOfBarrier.value, 2);

@@ -29098,6 +29098,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: AppodealAdsManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6986712597842786057, guid: 657ba1b058fab0245810f2dc90e09864, type: 3}
+      propertyPath: m_text
+      value: "Try Again \n(+ 30 $)"
+      objectReference: {fileID: 0}
     - target: {fileID: 6986712598361575556, guid: 657ba1b058fab0245810f2dc90e09864, type: 3}
       propertyPath: m_Pivot.x
       value: 0

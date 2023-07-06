@@ -3113,6 +3113,9 @@ GameObject:
   - component: {fileID: 2690973379759694114}
   - component: {fileID: 2690973379759694120}
   - component: {fileID: 8991973906935098610}
+  - component: {fileID: 5724327539845134367}
+  - component: {fileID: 3954992502078532376}
+  - component: {fileID: 7973772080676826979}
   m_Layer: 3
   m_Name: Character
   m_TagString: Player
@@ -3314,10 +3317,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  limitOfBrickStorage: 0
+  _playerMover: {fileID: 5724327539845134367}
+  _playerInputController: {fileID: 3954992502078532376}
+  _playerAnimator: {fileID: 7973772080676826979}
   _brickAudio: {fileID: 8300000, guid: 4deebb196f18acd4093fd52406700f9f, type: 3}
   _stepAudio: {fileID: 8300000, guid: b57bb73c7e96d4c4fa50f64b98a7211a, type: 3}
   _fallAudio: {fileID: 8300000, guid: cf28d6cfb1d20644d8e2dfbfead1e26a, type: 3}
-  _moveSpeed: 11
   HatPlace: {fileID: 2690973380501448125}
   m_Curve:
     serializedVersion: 2
@@ -3384,6 +3390,75 @@ CharacterController:
   m_SkinWidth: 0.045
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.81, z: 0.11}
+--- !u!114 &5724327539845134367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991973906935098609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1318ffed852638345ab72d29acc0017c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 28
+      outSlope: 28
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 14
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -28
+      outSlope: -28
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3954992502078532376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991973906935098609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec5473e61bc88f4abb0a0c58ff8a04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7973772080676826979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991973906935098609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee94ddb099740c4a826850592c1b7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9123487146306035238
 GameObject:
   m_ObjectHideFlags: 0
